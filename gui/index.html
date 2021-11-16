@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1" />
+        <title>Computer Emulator</title>
+        <link rel="stylesheet" href="./static/css/index.css" />
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="editor">
+                <div id="code-controls">
+                    <button id="run-code">Run</button>
+                </div>
+                <textarea id="code-editor" placeholder="Write code here..." spellcheck="false"></textarea>
+            </div>
+            <div id="output">
+                <ul id="console">Press <code>Run</code> and see output here.</ul>
+            </div>
+        </div>
+
+        <script src="./static/js/code-editor.js"></script>
+        <script type="module">
+
+            import { CPU } from '../cpu/CPU.js';
+            import { Lexer } from '../language/engine/Lexer.js';
+            import { Parser } from '../language/engine/Parser.js';
+            import { ConsoleOutput } from '../language/output/ConsoleOutput.js';
+
+            const cpu = new CPU(false);
+
+            const consoleOutput = new ConsoleOutput('#console');
+
+            document.getElementById('run-code').addEventListener('click', (e) => {
+
+                consoleOutput.clear();
+
+                const lexer = new Lexer(consoleOutput, document.getElementById('code-editor').value);
+
+                const parser = new Parser(cpu, consoleOutput, lexer.tokens).run();
+
+                consoleOutput.dumpBuffer();
+
+            });
+
+        </script>
+    </body>
+</html>

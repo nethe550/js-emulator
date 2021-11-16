@@ -1,0 +1,214 @@
+:root {
+
+    /* Root */
+
+    --background-color: rgb(25,25,30);
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --font-color: rgb(255,255,255);
+    --font-weight: 200;
+
+    --border-radius: 6px;
+
+    --body-padding: 2em;
+
+    /* Console */
+
+    --console-log-color: rgb(255,255,255);
+    --console-info-color: rgb(200,255,200);
+    --console-warn-color: rgb(255,255,200);
+    --console-error-color: rgb(255,200,200);
+
+    --console-font: 'Courier New', Courier, monospace;
+    --console-background-color: rgb(35,35,40);
+    --console-padding: 1em;
+
+    /* Scrollbar */
+
+    --scrollbar-track-color: rgb(45,45,50);
+    --scrollbar-thumb-color: rgb(65,65,70);
+    --scrollbar-thumb-hover-color: rgb(75,75,80);
+    --scrollbar-width: 10px;
+
+    /* Editor */
+
+    --editor-color: rgb(255,255,255);
+    --editor-background-color: rgb(45,45,50);
+    --editor-font: 'Courier New', Courier, monospace;
+    --editor-border: none;
+    --editor-tab-size: 4;
+    --editor-padding: 1em;
+    --editor-inner-padding: 1em;
+
+    --editor-controls-height: 32px;
+
+    --editor-controls-button-background-color: rgb(65,65,70);
+    --editor-controls-button-background-hover-color: rgb(75,75,80);
+    --editor-controls-button-background-active-color: rgb(85,85,90);
+    --editor-controls-button-border: 1px solid rgb(85,85,90);
+
+    --code-background-color: rgb(0,0,0);
+    --code-color: rgb(255,255,255);
+    --code-padding: 0.125em 0.25em;
+    --code-margin: 0;
+
+}
+
+/* Root */
+
+* {
+    font-family: var(--font-family);
+    color: var(--font-color);
+    font-weight: var(--font-weight);
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
+}
+
+*::-webkit-scrollbar {
+    width: var(--scrollbar-width);
+}
+
+*::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-track-color);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-color);
+    border-radius: var(--border-radius);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover-color);
+}
+
+html {
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    background-color: var(--background-color);
+}
+
+body {
+    padding: var(--body-padding);
+    position: absolute;
+    margin: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: calc(100% - var(--body-padding) * 2);
+    height: calc(100% - var(--body-padding) * 2);
+}
+
+code {
+    background-color: var(--code-background-color);
+    color: var(--code-color);
+    padding: var(--code-padding);
+    margin: var(--code-margin);
+    border-radius: var(--border-radius);
+}
+
+/* Wrapper */
+
+div#wrapper {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+div#wrapper > div#output {
+    width: 50%;
+    height: 100%;
+}
+
+div#wrapper > div#editor {
+    width: calc(50% - var(--editor-inner-padding) * 2);
+    height: calc(100% - var(--editor-inner-padding) - var(--editor-controls-height) / 2);
+}
+
+
+/* Console */
+
+ul#console {
+    margin: 0;
+    font-family: var(--console-font);
+    background-color: var(--console-background-color);
+    border-radius: var(--border-radius);
+    padding: var(--console-padding);
+    list-style-type: none;
+    height: calc(100% - var(--console-padding) * 2);
+    overflow: auto;
+}
+
+ul#console * {
+    font-family: var(--console-font);
+}
+
+ul#console *.console-log * {
+    color: var(--console-log-color);
+}
+
+ul#console *.console-info * {
+    color: var(--console-info-color);
+}
+
+ul#console *.console-warn * {
+    color: var(--console-warn-color);
+}
+
+ul#console *.console-error * {
+    color: var(--console-error-color);
+}
+
+/* Editor */
+
+div#editor {
+    margin: var(--editor-margin);
+}
+
+textarea#code-editor {
+    display: block;
+    color: var(--editor-color);
+    background-color: var(--editor-background-color);
+    font-family: var(--editor-font);
+    border: var(--editor-border);
+    border-radius: var(--border-radius);
+    width: calc(100% - var(--editor-padding) * 2 - var(--editor-inner-padding) * 2);
+    resize: none;
+    height: inherit;
+    tab-size: var(--editor-tab-size);
+    /* Firefox */
+    -moz-tab-size: var(--editor-tab-size);
+    padding: var(--editor-inner-padding);
+    overflow-y: auto;
+}
+
+div#code-controls {
+    display: flex;
+    height: var(--editor-controls-height);
+    max-height: var(--editor-controls-height);
+    flex-direction: row;
+    justify-content: flex-start;
+    column-gap: 0.5em;
+    align-items: center;
+}
+
+div#code-controls button {
+    display: inline;
+    background-color: var(--editor-controls-button-background-color);
+    border: var(--editor-controls-button-border);
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    text-align: center;
+}
+
+div#code-controls button:hover {
+    background-color: var(--editor-controls-button-background-hover-color);
+}
+
+div#code-controls button:active {
+    background-color: var(--editor-controls-button-background-active-color);
+}
